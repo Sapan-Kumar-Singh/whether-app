@@ -1,0 +1,16 @@
+{
+  "name": "whetherapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "country-state-city": "^3.2.1",
+    "node-html-parser": "^6.1.13",
+    "requests": "^0.3.0"
+  }
+}

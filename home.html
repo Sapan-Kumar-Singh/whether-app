@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: "Quicksand", sans-serif;
+        }
+
+        html,
+        body {
+            background: #f3f2ef;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            width: 100vw;
+            font-size: 62.5%;
+            height: 100%;
+        }
+
+
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .navlist {
+            background-color: #8499b8;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            height: 50px;
+            padding: 10px 0;
+            box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-icon {
+            padding-left: 10px;
+            font-size: 25px;
+            font-weight: bold;
+            color: aliceblue;
+            float: left;
+        }
+
+        .console-container {
+
+            font-size: 4rem;
+            font-weight: bold;
+            text-align: center;
+            height: 200px;
+            width: auto;
+            display: block;
+            position: relative;
+            color: white;
+            margin-top: 200px;
+        }
+
+        .console-underscore {
+            display: inline-block;
+            position: relative;
+            top: -0.14em;
+            left: 10px;
+        }
+
+
+
+
+        .select-country-menu {
+            width: 235px;
+            box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
+
+        }
+
+        .select-country-menu .select-country-btn {
+            height: 49px;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            padding: 0 15px 0 15px;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            background: #fff;
+            font-weight: normal;
+            font-size: medium;
+            align-items: center;
+            cursor: pointer;
+
+        }
+
+        .select-country-menu .country-options {
+            position: absolute;
+            width: 235px;
+            overflow-y: auto;
+            max-height: 227px;
+            margin-top: 5px;
+            border-radius: 5px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation-name: fadeInDown;
+            -webkit-animation-name: fadeInDown;
+            animation-duration: 0.35s;
+            animation-fill-mode: both;
+            -webkit-animation-duration: 0.35s;
+            -webkit-animation-fill-mode: both;
+        }
+
+        .select-country-menu .country-options .country-option {
+            /* display: flex; */
+            /* height: 55px; */
+            align-items: center;
+            background: #fff;
+            list-style: none;
+            padding: 10px 12px;
+            border-top: 2px solid rgba(0, 0, 0, 0.12);
+            cursor: pointer;
+            border-radius: 3px;
+            font-weight: normal;
+            font-size: medium;
+        }
+
+        .select-country-menu .country-options .country-option:hover {
+            background: #efefef;
+        }
+
+
+        .select-country-menu .country-options .country-option .country-option-text {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .country-btn-text {
+            padding: 10px;
+        }
+
+        .select-country-btn i {
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .select-country-menu.active .select-country-btn i {
+            transform: rotate(-180deg);
+        }
+
+        .select-country-menu.active .country-options {
+            display: block;
+            opacity: 0;
+            z-index: 10;
+            animation-name: fadeInUp;
+            -webkit-animation-name: fadeInUp;
+            animation-duration: 0.4s;
+            animation-fill-mode: both;
+            -webkit-animation-duration: 0.4s;
+            -webkit-animation-fill-mode: both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translate3d(0, 30px, 0);
+            }
+
+            to {
+                transform: translate3d(0, 0, 0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                transform: translate3d(0, 0, 0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translate3d(0, 20px, 0);
+                opacity: 0;
+            }
+        }
+
+        .select-state-menu {
+            width: 235px;
+            box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
+
+        }
+
+        .select-state-menu .select-state-btn {
+            height: 49px;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            padding: 0 15px 0 15px;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            background: #fff;
+            font-weight: normal;
+            font-size: medium;
+            align-items: center;
+            cursor: pointer;
+
+        }
+
+        .select-state-menu .state-options {
+            position: absolute;
+            width: 235px;
+            overflow-y: auto;
+            max-height: 227px;
+            margin-top: 5px;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation-name: fadeInDown;
+            -webkit-animation-name: fadeInDown;
+            animation-duration: 0.35s;
+            animation-fill-mode: both;
+            -webkit-animation-duration: 0.35s;
+            -webkit-animation-fill-mode: both;
+        }
+
+        .select-state-menu .state-options .state-option {
+            /* display: flex; */
+            /* height: 55px; */
+            align-items: center;
+            background: #fff;
+            list-style: none;
+            padding: 10px 12px;
+            border-top: 2px solid rgba(0, 0, 0, 0.12);
+            cursor: pointer;
+            border-radius: 3px;
+            font-weight: normal;
+            font-size: medium;
+        }
+
+        .select-state-menu .state-options .state-option:hover {
+            background: #efefef;
+        }
+
+
+        .select-state-menu .state-options .state-option .state-option-text {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .select-state-menu .state-options .disable-option {
+            font-size: 18px;
+            padding: 10px 12px;
+            border-radius: 3px;
+            color: #FF2E2E;
+            cursor: not-allowed;
+        }
+
+        .state-btn-text {
+            padding: 10px;
+        }
+
+        .select-state-btn i {
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .select-state-menu.active .select-state-btn i {
+            transform: rotate(-180deg);
+        }
+
+        .select-state-menu.active .state-options {
+            display: block;
+            opacity: 0;
+            z-index: 10;
+            animation-name: fadeInUp;
+            -webkit-animation-name: fadeInUp;
+            animation-duration: 0.4s;
+            animation-fill-mode: both;
+            -webkit-animation-duration: 0.4s;
+            -webkit-animation-fill-mode: both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translate3d(0, 30px, 0);
+            }
+
+            to {
+                transform: translate3d(0, 0, 0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                transform: translate3d(0, 0, 0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translate3d(0, 20px, 0);
+                opacity: 0;
+            }
+        }
+
+        .search-input {
+            background: #fff;
+            border-radius: 5px;
+            margin-right: 10px;
+            position: relative;
+            box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
+        }
+
+        .search-input input {
+            height: 45px;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            padding: 0 60px 0 20px;
+            font-size: 18px;
+        }
+
+        .search-input.active input {
+            border-radius: 5px 5px 0 0;
+        }
+
+        .search-input .autocom-box {
+            padding: 0;
+            opacity: 0;
+            margin-top: 5px;
+            pointer-events: none;
+            max-height: 250px;
+            overflow: auto;
+            background-color: #fff;
+        }
+
+        .search-input.active .autocom-box {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+
+        .autocom-box li {
+            list-style: none;
+            padding: 10px 12px;
+            border-top: 2px solid rgba(0, 0, 0, 0.12);
+            display: none;
+            cursor: pointer;
+            border-radius: 3px;
+            font-weight: normal;
+            font-size: medium;
+
+        }
+
+        .search-input.active .autocom-box li {
+            display: block;
+        }
+
+        .autocom-box li:hover {
+            background: #efefef;
+        }
+
+        .search-input .icon {
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            height: 45px;
+            width: 45px;
+            text-align: center;
+            line-height: 45px;
+            font-size: 20px;
+            color: #644bff;
+            cursor: pointer;
+        }
+
+        .card {
+            width: 20vw;
+            height: 60vh;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.2rem 3rem rgba(0, 0, 0, 0.2);
+            background: #a5bbdd;
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
+            min-width: 20rem;
+            min-height: 35rem;
+            margin: auto;
+            margin-top: 100px;
+            justify-content: center;
+            display: none;
+        }
+
+        .wave {
+            opacity: 0.3;
+            position: absolute;
+            top: 120%;
+            left: 50%;
+            background: white;
+            width: 50rem;
+            height: 50rem;
+            margin-left: -25rem;
+            margin-top: -25rem;
+            transform-origin: 50% 48%;
+            border-radius: 43%;
+            animation: drift 3000ms infinite linear;
+            z-index: 1;
+        }
+
+        .wave.-three {
+            animation: drift 5000ms infinite linear;
+            z-index: 2 !important;
+            opacity: 0.2;
+        }
+
+        .wave.-two {
+            animation: drift 7000ms infinite linear;
+            opacity: 0.1;
+            z-index: 3 !important;
+        }
+
+        .card:after {
+            content: "";
+            display: block;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 11;
+            transform: translate3d(0, 0, 0);
+        }
+
+        @keyframes drift {
+            from {
+                transform: rotate(0deg);
+            }
+
+            from {
+                transform: rotate(360deg);
+            }
+        }
+
+        .info {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 45%;
+            z-index: 4;
+        }
+
+        .location {
+            margin-top: 1.5rem;
+            font-weight: 600;
+            font-size: 3rem;
+            margin-left:30px;
+        }
+
+        .fa-street-view {
+            animation: rotates 3s linear infinite alternate;
+        }
+
+        @keyframes rotates {
+            from {
+                transform: translateX(-0.5rem);
+            }
+
+            to {
+                transform: translateX(0.5rem);
+            }
+        }
+        
+        .temp-container{
+          display: flex;
+          margin-left: 70px;
+        }
+        .whether_icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        .whether_icon img {
+            width: 100%;
+            height: 100%;
+        }
+
+        #date {
+            margin-top: 0.5rem;
+            margin-left: 70px;
+            color: #57606f;
+            font-size: 1.2rem;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+
+        .temp {
+            margin-top: 2rem;
+            font-weight: 600;;
+            font-size: 2rem;
+        }
+
+        .temp_minmax {
+            margin-top: 0.3rem;
+            margin-left: 70px;
+            font-weight: 300;
+            font-size: 1.2rem;
+            color: #57606f;
+        }
+
+
+
+
+        @keyframes fas-anime {
+            from {
+                transform: scale(1.1);
+            }
+
+            to {
+                transform: scale(1.5);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                width: 90vw;
+                height: 80vh;
+            }
+
+            .wave {
+                top: 85%;
+            }
+
+            #weather_icon {
+                font-size: 5em;
+            }
+
+            .info {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-height: 500px) {
+            .card {
+                height: 80vh;
+            }
+
+            .wave {
+                top: 115%;
+            }
+        }
+
+        body>span {
+            width: 100vw;
+            text-align: center;
+            color: grey;
+        }
+    </style>
+    <title>Whether app</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="navlist">
+            <div class="nav-icon">Whether app</div>
+            <div class="select-country-menu ">
+                <div class="select-country-btn">
+                    <span class="country-btn-text">Select country</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+
+                <ul class="country-options">
+                    <!-- <li class="country-option">
+                        <span class="country-option-text">Instagram</span>
+                    </li>
+                    <li class="country-option">
+                        <span class="country-option-text">Linkedin</span>
+                    </li>
+                    <li class="country-option">
+                        <span class="country-option-text">Facebook</span>
+                    </li>
+                    <li class="country-option">
+
+                        <span class="country-option-text">Twitter</span>
+                    </li> -->
+                </ul>
+            </div>
+
+            <div class="select-state-menu ">
+                <div class="select-state-btn">
+                    <span class="state-btn-text">Select state</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+
+                <ul class="state-options">
+                    <!-- <li class="state-option">
+                        <span class="state-option-text">Instagram</span>
+                    </li>
+                    <li class="state-option">
+                        <span class="state-option-text">Linkedin</span>
+                    </li>
+                    <li class="state-option">
+                        <span class="state-option-text">Facebook</span>
+                    </li>
+                    <li class="state-option">
+
+                        <span class="state-option-text">Twitter</span>
+                    </li> -->
+                </ul>
+            </div>
+            <!-- search bar right align -->
+            <div class="search-input">
+                <!-- <a href="" target="_blank" hidden></a> -->
+                <input type="text" placeholder="Enter your city name...">
+                <div class="autocom-box">
+                    <!-- here list are inserted from javascript -->
+                </div>
+                <div class="icon"><i class="fas fa-search"></i></div>
+            </div>
+
+
+        </div>
+        <div class='console-container'><span id='text'></span>
+            <div class='console-underscore' id='console'>&#95;</div>
+        </div>
+        <div class="card">
+            <div class="wave -one"></div>
+            <div class="wave -two"></div>
+            <div class="wave -three"></div>
+           <div style="margin-top:80%">
+            <h2 class="location"><i class="fa-solid fa-street-view"></i> {%location%} , {%country%}</h2>
+            <p id="date">WED | OCT 24 | 12:57 AM</p>
+
+            <div class="temp-container">
+                    <div class="temp">{%temp%} &deg;C</div>
+                <div class="whether_icon">
+                    <img src="" alt="weather icon">
+                </div>
+            </div>
+            <h3 class="temp_minmax">Min {%temp_min%} &deg;C | Max {%temp_max%} &deg;C</h3>
+           </div>
+           
+        </div>
+    </div>
+
+
+
+
+    <script>
+
+        // to display welocme page
+
+        // function([string1, string2],target id,[color1,color2])    
+        consoleText(['Welcome to whether app', 'Select country'], 'text', ['#8499b8', '#8499b8']);
+
+        function consoleText(words, id, colors) {
+            if (colors === undefined) colors = ['#fff'];
+            var visible = true;
+            var con = document.getElementById('console');
+            var letterCount = 1;
+            var x = 1;
+            var waiting = false;
+            var target = document.getElementById(id)
+            target.setAttribute('style', 'color:' + colors[0])
+            window.setInterval(function () {
+
+                if (letterCount === 0 && waiting === false) {
+                    waiting = true;
+                    target.innerHTML = words[0].substring(0, letterCount)
+                    window.setTimeout(function () {
+                        var usedColor = colors.shift();
+                        colors.push(usedColor);
+                        var usedWord = words.shift();
+                        words.push(usedWord);
+                        x = 1;
+                        target.setAttribute('style', 'color:' + colors[0])
+                        letterCount += x;
+                        waiting = false;
+                    }, 1000)
+                } else if (letterCount === words[0].length + 1 && waiting === false) {
+                    waiting = true;
+                    window.setTimeout(function () {
+                        x = -1;
+                        letterCount += x;
+                        waiting = false;
+                    }, 1000)
+                } else if (waiting === false) {
+                    target.innerHTML = words[0].substring(0, letterCount)
+                    letterCount += x;
+                }
+            }, 120)
+            window.setInterval(function () {
+                if (visible === true) {
+                    con.className = 'console-underscore hidden'
+                    visible = false;
+
+                } else {
+                    con.className = 'console-underscore'
+
+                    visible = true;
+                }
+            }, 400)
+        }
+
+
+
+
+
+        // to display whether data
+
+        const currentdate = document.getElementById('date');
+
+
+        const getDayMonthCurrentTime = () => {
+            const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const weekDay = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            const now = new Date();
+            let hours = now.getHours();
+            let min = now.getMinutes();
+            let ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            min = min < 10 ? '0' + min : min;
+            var strTime = hours + ':' + min + ' ' + ampm;
+            return `${weekDay[now.getDay()]}  | ${month[now.getMonth()]} ${now.getDate()} | ${strTime}`
+
+        }
+
+        currentdate.innerHTML = getDayMonthCurrentTime();
+
+
+        // getting all required elements
+        const searchwrapper = document.querySelector(".search-input");
+        const inputBox = searchwrapper.querySelector("input");
+        const suggBox = searchwrapper.querySelector(".autocom-box");
+        const icon = searchwrapper.querySelector(".icon");
+        let linkTag = searchwrapper.querySelector("a");
+        let selectData = "";
+        const countryOptionMenu = document.querySelector(".select-country-menu");
+        const selectCountryBtn = countryOptionMenu.querySelector(".select-country-btn");
+        const countryOptions = countryOptionMenu.querySelector(".country-options");
+        const country_btn_text = countryOptionMenu.querySelector(".country-btn-text");
+
+        const stateOptionMenu = document.querySelector(".select-state-menu");
+        const stateOptions = stateOptionMenu.querySelector(".state-options")
+        const selectStateBtn = stateOptionMenu.querySelector(".select-state-btn");
+        const state_btn_text = stateOptionMenu.querySelector(".state-btn-text");
+        const countryMap = new Map();
+        const stateMap = new Map();
+        let allCities = [];
+
+        selectCountryBtn.addEventListener("click", async () => {
+            await fetch('/getCountries', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    data.countries.map((countryInfo) => {
+
+                        let listText = document.createElement("span");
+                        listText.classList.add("country-option-text");
+                        listText.innerHTML = `${countryInfo.name}`;
+                        countryMap.set(countryInfo.name, countryInfo.isoCode)
+                        let listItem = document.createElement("li");
+                        listItem.classList.add("country-option");
+                        listItem.appendChild(listText);
+                        countryOptions.appendChild(listItem);
+                    })
+
+                })
+                .catch(err => console.error("Error", err));
+            const countryOption = countryOptionMenu.querySelectorAll(".country-option");
+            countryOptionMenu.classList.toggle("active");
+            countryOption.forEach((option) => {
+
+                option.addEventListener("click", () => {
+                    while (stateOptions.firstChild) {
+                        stateOptions.removeChild(stateOptions.lastChild)
+                    }
+                    stateOptionMenu.classList.remove("active")
+                    let selectedOption = option.querySelector(".country-option-text").innerText;
+                    country_btn_text.innerText = selectedOption;
+                    countryOptionMenu.classList.remove("active");
+                });
+            });
+        });
+
+
+
+        selectStateBtn.addEventListener("click", async () => {
+
+            if (countryMap.has(country_btn_text.innerHTML)) {
+                await fetch('/getStates', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ countryCode: countryMap.get(country_btn_text.innerHTML) })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+
+                        if (data.allStates.length === 0) {
+                            let listText = document.createElement("span");
+                            listText.classList.add("state-option-text");
+                            listText.innerHTML = "Oops! country has no state";
+                            let listItem = document.createElement("li");
+                            listItem.classList.add("disable-option");
+                            listItem.appendChild(listText);
+                            stateOptions.appendChild(listItem);
+                        } else {
+                            data.allStates.map((stateInfo) => {
+                                let listText = document.createElement("span");
+                                listText.classList.add("state-option-text");
+                                listText.innerHTML = `${stateInfo.name}`;
+                                stateMap.set(stateInfo.name, stateInfo.isoCode)
+                                let listItem = document.createElement("li");
+                                listItem.classList.add("state-option");
+                                listItem.appendChild(listText);
+                                stateOptions.appendChild(listItem);
+                            })
+                        }
+                    })
+                    .catch(err => console.error("Error", err));
+            } else {
+                let listText = document.createElement("span");
+                listText.classList.add("state-option-text");
+                listText.innerHTML = "Oops! select country";
+                let listItem = document.createElement("li");
+                listItem.classList.add("disable-option");
+                listItem.appendChild(listText);
+                stateOptions.appendChild(listItem);
+            }
+
+            stateOptionMenu.classList.toggle("active");
+            const stateOption = stateOptionMenu.querySelectorAll(".state-option");
+            stateOption.forEach((option) => {
+                option.addEventListener("click", async () => {
+                    let selectedOption = option.querySelector(".state-option-text").innerText;
+                    state_btn_text.innerText = selectedOption;
+                    if (countryMap.has(country_btn_text.innerHTML) && stateMap.has(state_btn_text.innerHTML)) {
+                        allCities = [];
+                        await fetch('/getCities', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ countryCode: countryMap.get(country_btn_text.innerHTML), stateCode: stateMap.get(state_btn_text.innerHTML) })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                data.allCities.map((cityInfo) => {
+                                    allCities.push(cityInfo.name);
+                                })
+                            })
+                    }
+                    stateOptionMenu.classList.remove("active")
+                });
+            });
+
+
+        });
+
+
+
+
+
+        // if user press any key and release
+        inputBox.onkeyup = (e) => {
+            let userData = e.target.value; //user enetered data
+            let emptyArray = [];
+            if (userData) {
+
+                emptyArray = allCities.filter((data) => {
+                    //filtering array value and user characters to lowercase and return only those words which are start with user enetered chars
+                    return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase());
+                });
+                emptyArray = emptyArray.map((data) => {
+                    // passing return data inside li tag
+                    return data = `<li>${data}</li>`;
+                });
+                searchwrapper.classList.add("active"); //show autocomplete box
+                showSuggestions(emptyArray);
+                let allList = suggBox.querySelectorAll("li");
+                for (let i = 0; i < allList.length; i++) {
+                    //adding onclick attribute in all li tag
+                    allList[i].setAttribute("onclick", "select(this)");
+                }
+            } else {
+                searchwrapper.classList.remove("active"); //hide autocomplete box
+            }
+        }
+
+        function select(element) {
+            let selectData = element.textContent;
+            inputBox.value = selectData;
+            searchwrapper.classList.remove("active");
+        }
+
+        function showSuggestions(list) {
+            let listData;
+            if (!list.length) {
+                userValue = inputBox.value;
+                listData = `<li>${userValue}</li>`;
+            } else {
+                listData = list.join('');
+            }
+            suggBox.innerHTML = listData;
+        }
+
+        icon.addEventListener('click', () => {
+
+            fetch('/sendString', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ value: inputBox.value })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const card = document.querySelector('.card');
+                    const consoleContainer = document.querySelector('.console-container');
+                    consoleContainer.style.display = 'none';
+                    card.style.display = 'block';
+                    const locationElement = document.querySelector('.location');
+                    const whetherIcon = document.querySelector('.whether_icon img');
+                    const iconURL = `https://openweathermap.org/img/wn/${data.weatherData.weather[0].icon}.png`;
+                    console.log("whether icon--", whetherIcon)
+                    const temp = document.querySelector('.temp');
+                    const temp_minmax = document.querySelector('.temp_minmax');
+                    locationElement.innerHTML = `<i class="fa-solid fa-street-view"></i> ${data.weatherData.name}, ${data.weatherData.sys.country}`;
+                    whetherIcon.setAttribute('src', iconURL)
+                    temp.innerHTML = `${(data.weatherData.main.temp - 273.15).toFixed(2)} &deg;C`;
+                    temp_minmax.innerHTML = `Min ${(data.weatherData.main.temp_min - 273.15).toFixed(2)} &deg;C| Max ${(data.weatherData.main.temp_max - 273.15).toFixed(2)} &deg;C`
+                })
+                .catch(error => console.error('Error:', error));
+        })
+
+    </script>
+</body>
+
+</html>
